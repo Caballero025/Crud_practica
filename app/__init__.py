@@ -7,10 +7,27 @@ from dotenv import load_dotenv
 #Cargar las variables de entorno
 load_dotenv()
 
-#crear instancia
-app =  Flask(__name__)
+app = Flask(__name__)
+
+# Configuración de la base de datos PostgreSQL
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+from app.models import Alumnos
+
+#Importar y registrar blueprints
+from app.routes.alums import alu_bp
+
+
+
+
+
+app.register_blueprint(alu_bp, url_prefix='/')
+
 
 #Ruta principal home
 @app.route('/')
 def index():
-     return "Hola mundo"
+     return render_template('index.html')
