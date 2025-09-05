@@ -44,6 +44,7 @@ def update_alumno(no_control):
         return redirect(url_for('index'))
     return render_template('update_alumno.html',alumno = alumno)
 
+@alu_bp.route('/delete/<string:no_control>')
 def delete_alumno(no_control):
     alumno = Alumnos.query.get(no_control)
     if alumno:
