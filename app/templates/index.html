@@ -21,7 +21,7 @@
     <td>{{alumno.ap_paterno}}</td>
     <td>{{alumno.ap_materno}}</td>
     <td>{{alumno.semestre}}</td>
-  
+    <td><a href="{{url_for('alumnos.update_alumno',no_control = alumno.no_control)}}" class="btn btn-warning">Actualizar</a></td>
   </tr> 
   {% endfor %}
 

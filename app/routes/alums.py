@@ -30,3 +30,23 @@ def create_alumno():
          return redirect(url_for('alumnos.index'))
      #Aqui sigue si es GET
      return render_template('create_alumno.html')
+
+@alu_bp.route('/update/<string:no_control>', methods=['GET','POST'])
+def update_alumno(no_control):
+    alumno = Alumnos.query.get(no_control)
+
+    if request.method == 'POST':
+        alumno.nombre = request.form['nombre']
+        alumno.ap_paterno = request.form['ap_paterno']
+        alumno.ap_materno = request.form['ap_materno']
+        alumno.semestre = request.form['semestre']
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('update_alumno.html',alumno = alumno)
+
+def delete_alumno(no_control):
+    alumno = Alumnos.query.get(no_control)
+    if alumno:
+        db.session.delete(alumno)
+        db.session.commit()
+    return redirect(url_for('alumnos.index'))
