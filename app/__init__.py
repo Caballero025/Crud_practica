@@ -21,7 +21,9 @@ from app.models import Alumnos
 from app.routes.alums import alu_bp
 
 
-
+# Crear las tablas si no existen
+with app.app_context():
+    db.create_all()
 
 
 app.register_blueprint(alu_bp, url_prefix='/')
